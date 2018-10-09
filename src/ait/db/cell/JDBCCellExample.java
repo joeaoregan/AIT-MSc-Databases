@@ -52,11 +52,19 @@ class JDBCCellExample extends JFrame implements ActionListener {
 	private void initDBConnection() {
 		try {
 			// Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/pm";
+			//String url = "jdbc:mysql://localhost:3306/pm2";
+			//String url = "jdbc:mysql://127.0.0.1:3306/pm";
+			//jdbc:mysql://<localhost>:<port>/<database>?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
+			
+			// Newer connection string needed for Workbench 8.0
+			String url = "jdbc:mysql://localhost:3306/pm2?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
 			con = DriverManager.getConnection(url, "root", "admin");
 			stmt = con.createStatement();
 			ps = con.prepareStatement("select count(*) from pm.perf where Cell_ID =  ?");
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.print("Failed to initialise DB Connection");
 		}
 	}

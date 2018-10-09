@@ -1,4 +1,6 @@
 /.settings/
 /bin/
+/WebContent/
+/build/
 *.classpath
 *.project
