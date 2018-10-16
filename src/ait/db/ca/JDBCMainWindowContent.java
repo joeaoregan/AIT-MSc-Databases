@@ -82,13 +82,17 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 		button.setLocation(x, y);
 		button.addActionListener(this);
 	}
-//	public void setupPanel(JComponent panel, LayoutManager mgr, Color bg, String borderName, int w, int h, int x, int y) {
+
 	public void setupPanel(JComponent panel, Color bg, String borderName, int w, int h, int x, int y) {
-//		panel.setLayout(mgr);
 		panel.setBackground(bg);
 		panel.setBorder(BorderFactory.createTitledBorder(lineBorder, borderName));
 		panel.setSize(w, h);
-		panel.setLocation(x, y);		
+		panel.setLocation(x, y);
+	}
+
+	public void resetJTextFields(JTextField[] jtextfields) {
+		for (JTextField jtext : jtextfields)
+			jtext.setText("");
 	}
 
 	public JDBCMainWindowContent(String aTitle) {
@@ -106,31 +110,20 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 		// setup details panel and add the components to it
 		detailsPanel = new JPanel();
 		detailsPanel.setLayout(new GridLayout(11, 2));
-//		detailsPanel.setBackground(Color.lightGray);
-//		detailsPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "AP Details"));
-//		detailsPanel.setSize(360, 300);
-//		detailsPanel.setLocation(3, 0);
-
+		setupPanel(detailsPanel, Color.lightGray, "AP Details", 360, 300, 3, 0);
 		// setup details panel and add the components to it
 		exportButtonPanel = new JPanel();
 		exportButtonPanel.setLayout(new GridLayout(3, 2));
-//		exportButtonPanel.setBackground(Color.lightGray);
-//		exportButtonPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "Export Data"));
-//		exportButtonPanel.setSize(500, 200);
-//		exportButtonPanel.setLocation(3, 300);
-//		setupPanel(detailsPanel,new GridLayout(11, 2), Color.lightGray, "AP Details", 360, 300, 3, 0);
-//		setupPanel(exportButtonPanel,new GridLayout(3, 2), Color.lightGray, "Export Data", 500, 200, 3, 300);
-		setupPanel(detailsPanel,Color.lightGray, "AP Details", 360, 300, 3, 0);
 		setupPanel(exportButtonPanel, Color.lightGray, "Export Data", 500, 200, 3, 300);
 
 		addStuffToJPanel(detailsPanel,
 				new Component[] { RecordIDLabel, RecordIDTF, SSIDLabel, SSIDTF, dateLabel, dateTF, RSSLabel, RSSTF,
 						macLossLabel, macLossTF, delayLabel, delayTF, channelLabel, channelTF, secLabel, secTF, swLabel,
 						swTF, gpsLongLabel, gpsLongTF, gpsLatLabel, gpsLatTF });
-		
+
 		addStuffToJPanel(exportButtonPanel, new Component[] { last3LossRates, last3LossRatesTF, avgofRSS, avgofRSSTF,
 				overLappingAP, overLappingChannels });
-		
+
 		setButtonSizeAndLocation(insertButton, 100, 30, 370, 10);
 		setButtonSizeAndLocation(updateButton, 100, 30, 370, 110);
 		setButtonSizeAndLocation(exportButton, 100, 30, 370, 160);
@@ -144,11 +137,7 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 
 		dbContentsPanel = new JScrollPane(TableofDBContents, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
-//		dbContentsPanel.setBackground(Color.lightGray);
-//		dbContentsPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "Database Content"));
-//		dbContentsPanel.setSize(700, 300);
-//		dbContentsPanel.setLocation(477, 0);
+
 		setupPanel(dbContentsPanel, Color.lightGray, "Database Content", 700, 300, 477, 0);
 
 		content.add(detailsPanel);
@@ -181,17 +170,19 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 	public void actionPerformed(ActionEvent e) {
 		Object target = e.getSource();
 		if (target == clearButton) {
-			RecordIDTF.setText("");
-			SSIDTF.setText("");
-			dateTF.setText("");
-			RSSTF.setText("");
-			macLossTF.setText("");
-			delayTF.setText("");
-			channelTF.setText("");
-			secTF.setText("");
-			swTF.setText("");
-			gpsLongTF.setText("");
-			gpsLatTF.setText("");
+			resetJTextFields(new JTextField[] { RecordIDTF, SSIDTF, dateTF, RSSTF, macLossTF, delayTF, channelTF, secTF,
+					swTF, gpsLongTF, gpsLatTF });
+//			RecordIDTF.setText("");
+//			SSIDTF.setText("");
+//			dateTF.setText("");
+//			RSSTF.setText("");
+//			macLossTF.setText("");
+//			delayTF.setText("");
+//			channelTF.setText("");
+//			secTF.setText("");
+//			swTF.setText("");
+//			gpsLongTF.setText("");
+//			gpsLatTF.setText("");
 		}
 
 		if (target == insertButton) {
@@ -223,11 +214,11 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 		}
 		if (target == updateButton) {
 			try {
-				String updateTemp = "UPDATE APPERFDATA SET SSID = '" + SSIDTF.getText() +
-						"', Date = " + "'" + dateTF.getText() + "'" + ", RSS = " + RSSTF.getText() + ", MAC_Loss = "
-						+ macLossTF.getText() + ", Delay = " + delayTF.getText() + ", Channel = " + channelTF.getText()
-						+ ", Sec = " + "'" + secTF.getText() + "'" + ", Software_Version = " + swTF.getText()
-						+ ", GPS_Long = " + gpsLongTF.getText() + ", GPS_Lat = " + gpsLatTF.getText()
+				String updateTemp = "UPDATE APPERFDATA SET SSID = '" + SSIDTF.getText() + "', Date = " + "'"
+						+ dateTF.getText() + "'" + ", RSS = " + RSSTF.getText() + ", MAC_Loss = " + macLossTF.getText()
+						+ ", Delay = " + delayTF.getText() + ", Channel = " + channelTF.getText() + ", Sec = " + "'"
+						+ secTF.getText() + "'" + ", Software_Version = " + swTF.getText()
+//						+ ", GPS_Long = " + gpsLongTF.getText() + ", GPS_Lat = " + gpsLatTF.getText()
 						+ " where Rec_id = " + RecordIDTF.getText();
 
 				System.out.println(updateTemp);
