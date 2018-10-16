@@ -17,7 +17,6 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 
 	private JPanel detailsPanel;
 	private JPanel exportButtonPanel;
-//	private JPanel exportConceptDataPanel;
 	private JScrollPane dbContentsPanel;
 
 	private Border lineBorder;
@@ -84,6 +83,7 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 	}
 
 	public void setupPanel(JComponent panel, Color bg, String borderName, int w, int h, int x, int y) {
+		lineBorder = BorderFactory.createEtchedBorder(15, Color.blue, Color.black);
 		panel.setBackground(bg);
 		panel.setBorder(BorderFactory.createTitledBorder(lineBorder, borderName));
 		panel.setSize(w, h);
@@ -105,7 +105,6 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 		content = getContentPane();
 		content.setLayout(null);
 		content.setBackground(Color.lightGray);
-		lineBorder = BorderFactory.createEtchedBorder(15, Color.red, Color.black);
 
 		// setup details panel and add the components to it
 		detailsPanel = new JPanel();
@@ -172,17 +171,6 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 		if (target == clearButton) {
 			resetJTextFields(new JTextField[] { RecordIDTF, SSIDTF, dateTF, RSSTF, macLossTF, delayTF, channelTF, secTF,
 					swTF, gpsLongTF, gpsLatTF });
-//			RecordIDTF.setText("");
-//			SSIDTF.setText("");
-//			dateTF.setText("");
-//			RSSTF.setText("");
-//			macLossTF.setText("");
-//			delayTF.setText("");
-//			channelTF.setText("");
-//			secTF.setText("");
-//			swTF.setText("");
-//			gpsLongTF.setText("");
-//			gpsLatTF.setText("");
 		}
 
 		if (target == insertButton) {
