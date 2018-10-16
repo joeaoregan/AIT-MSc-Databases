@@ -66,6 +66,30 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 	private JButton overLappingAP = new JButton("AP Location");
 	private JButton overLappingChannels = new JButton("AP Channel");
 
+	// JOR
+//	public void addStuffToDetailsPanel(Component[] components) {
+//		for (Component component : components)
+//			detailsPanel.add(component);
+//	}
+//
+//	public void addStuffToExportButtonPanel(Component[] components) {
+//		for (Component component : components)
+//			exportButtonPanel.add(component);
+//	}
+	public void addStuffToJPanel(JPanel panel, Component[] components) {
+		for (Component component : components)
+			panel.add(component);
+	}
+	public void addStuffToContainer(Container container, Component[] components) {
+		for (Component component : components)
+			container.add(component);
+	}
+	public void setButtonSizeAndLocation(JButton button, int w, int h, int x, int y) {
+		button.setSize(w, h);
+		button.setLocation(x, y);
+		button.addActionListener(this);
+	}
+
 	public JDBCMainWindowContent(String aTitle) {
 		// setting up the GUI
 		super(aTitle, false, false, false, false);
@@ -84,67 +108,80 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 		detailsPanel.setBackground(Color.lightGray);
 		detailsPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "AP Details"));
 
-		detailsPanel.add(RecordIDLabel);
-		detailsPanel.add(RecordIDTF);
-		detailsPanel.add(SSIDLabel);
-		detailsPanel.add(SSIDTF);
-		detailsPanel.add(dateLabel);
-		detailsPanel.add(dateTF);
-		detailsPanel.add(RSSLabel);
-		detailsPanel.add(RSSTF);
-		detailsPanel.add(macLossLabel);
-		detailsPanel.add(macLossTF);
-		detailsPanel.add(delayLabel);
-		detailsPanel.add(delayTF);
-		detailsPanel.add(channelLabel);
-		detailsPanel.add(channelTF);
-		detailsPanel.add(secLabel);
-		detailsPanel.add(secTF);
-		detailsPanel.add(swLabel);
-		detailsPanel.add(swTF);
-		detailsPanel.add(gpsLongLabel);
-		detailsPanel.add(gpsLongTF);
-		detailsPanel.add(gpsLatLabel);
-		detailsPanel.add(gpsLatTF);
+//		detailsPanel.add(RecordIDLabel);
+//		detailsPanel.add(RecordIDTF);
+//		detailsPanel.add(SSIDLabel);
+//		detailsPanel.add(SSIDTF);
+//		detailsPanel.add(dateLabel);
+//		detailsPanel.add(dateTF);
+//		detailsPanel.add(RSSLabel);
+//		detailsPanel.add(RSSTF);
+//		detailsPanel.add(macLossLabel);
+//		detailsPanel.add(macLossTF);
+//		detailsPanel.add(delayLabel);
+//		detailsPanel.add(delayTF);
+//		detailsPanel.add(channelLabel);
+//		detailsPanel.add(channelTF);
+//		detailsPanel.add(secLabel);
+//		detailsPanel.add(secTF);
+//		detailsPanel.add(swLabel);
+//		detailsPanel.add(swTF);
+//		detailsPanel.add(gpsLongLabel);
+//		detailsPanel.add(gpsLongTF);
+//		detailsPanel.add(gpsLatLabel);
+//		detailsPanel.add(gpsLatTF);
+//		addStuffToDetailsPanel(
+		addStuffToJPanel(detailsPanel, new Component[] { RecordIDLabel, RecordIDTF, SSIDLabel, SSIDTF, dateLabel, dateTF,
+				RSSLabel, RSSTF, macLossLabel, macLossTF, delayLabel, delayTF, channelLabel, channelTF, secLabel, secTF,
+				swLabel, swTF, gpsLongLabel, gpsLongTF, gpsLatLabel, gpsLatTF });
 
 		// setup details panel and add the components to it
 		exportButtonPanel = new JPanel();
 		exportButtonPanel.setLayout(new GridLayout(3, 2));
 		exportButtonPanel.setBackground(Color.lightGray);
 		exportButtonPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "Export Data"));
-		exportButtonPanel.add(last3LossRates);
-		exportButtonPanel.add(last3LossRatesTF);
-		exportButtonPanel.add(avgofRSS);
-		exportButtonPanel.add(avgofRSSTF);
-		exportButtonPanel.add(overLappingAP);
-		exportButtonPanel.add(overLappingChannels);
+		// exportButtonPanel.add(last3LossRates);
+		// exportButtonPanel.add(last3LossRatesTF);
+		// exportButtonPanel.add(avgofRSS);
+		// exportButtonPanel.add(avgofRSSTF);
+		// exportButtonPanel.add(overLappingAP);
+		// exportButtonPanel.add(overLappingChannels);
+		//addStuffToExportButtonPanel(
+		addStuffToJPanel(exportButtonPanel, new Component[] { last3LossRates, last3LossRatesTF, avgofRSS, avgofRSSTF,
+				overLappingAP, overLappingChannels });
 		exportButtonPanel.setSize(500, 200);
 		exportButtonPanel.setLocation(3, 300);
-		content.add(exportButtonPanel);
+		//content.add(exportButtonPanel);
 
-		insertButton.setSize(100, 30);
-		updateButton.setSize(100, 30);
-		exportButton.setSize(100, 30);
-		deleteButton.setSize(100, 30);
-		clearButton.setSize(100, 30);
+//		insertButton.setSize(100, 30);
+//		updateButton.setSize(100, 30);
+//		exportButton.setSize(100, 30);
+//		deleteButton.setSize(100, 30);
+//		clearButton.setSize(100, 30);
+//
+//		insertButton.setLocation(370, 10);
+//		updateButton.setLocation(370, 110);
+//		exportButton.setLocation(370, 160);
+//		deleteButton.setLocation(370, 60);
+//		clearButton.setLocation(370, 210);
+		setButtonSizeAndLocation(insertButton,100,30,370,10);
+		setButtonSizeAndLocation(updateButton,100,30,370,110);
+		setButtonSizeAndLocation(exportButton,100,30,370,160);
+		setButtonSizeAndLocation(deleteButton,100,30,370,60);
+		setButtonSizeAndLocation(clearButton,100,30,370,210);
 
-		insertButton.setLocation(370, 10);
-		updateButton.setLocation(370, 110);
-		exportButton.setLocation(370, 160);
-		deleteButton.setLocation(370, 60);
-		clearButton.setLocation(370, 210);
+//		insertButton.addActionListener(this);
+//		updateButton.addActionListener(this);
+//		exportButton.addActionListener(this);
+//		deleteButton.addActionListener(this);
+//		clearButton.addActionListener(this);
 
-		insertButton.addActionListener(this);
-		updateButton.addActionListener(this);
-		exportButton.addActionListener(this);
-		deleteButton.addActionListener(this);
-		clearButton.addActionListener(this);
-
-		content.add(insertButton);
-		content.add(updateButton);
-		content.add(exportButton);
-		content.add(deleteButton);
-		content.add(clearButton);
+//		content.add(insertButton);
+//		content.add(updateButton);
+//		content.add(exportButton);
+//		content.add(deleteButton);
+//		content.add(clearButton);
+		addStuffToContainer(content, new Component[] {exportButtonPanel,insertButton,updateButton,exportButton,deleteButton,clearButton});
 
 		TableofDBContents.setPreferredScrollableViewportSize(new Dimension(900, 300));
 
