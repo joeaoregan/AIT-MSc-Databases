@@ -67,27 +67,28 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 	private JButton overLappingChannels = new JButton("AP Channel");
 
 	// JOR
-//	public void addStuffToDetailsPanel(Component[] components) {
-//		for (Component component : components)
-//			detailsPanel.add(component);
-//	}
-//
-//	public void addStuffToExportButtonPanel(Component[] components) {
-//		for (Component component : components)
-//			exportButtonPanel.add(component);
-//	}
 	public void addStuffToJPanel(JPanel panel, Component[] components) {
 		for (Component component : components)
 			panel.add(component);
 	}
+
 	public void addStuffToContainer(Container container, Component[] components) {
 		for (Component component : components)
 			container.add(component);
 	}
+
 	public void setButtonSizeAndLocation(JButton button, int w, int h, int x, int y) {
 		button.setSize(w, h);
 		button.setLocation(x, y);
 		button.addActionListener(this);
+	}
+//	public void setupPanel(JComponent panel, LayoutManager mgr, Color bg, String borderName, int w, int h, int x, int y) {
+	public void setupPanel(JComponent panel, Color bg, String borderName, int w, int h, int x, int y) {
+//		panel.setLayout(mgr);
+		panel.setBackground(bg);
+		panel.setBorder(BorderFactory.createTitledBorder(lineBorder, borderName));
+		panel.setSize(w, h);
+		panel.setLocation(x, y);		
 	}
 
 	public JDBCMainWindowContent(String aTitle) {
@@ -105,95 +106,50 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 		// setup details panel and add the components to it
 		detailsPanel = new JPanel();
 		detailsPanel.setLayout(new GridLayout(11, 2));
-		detailsPanel.setBackground(Color.lightGray);
-		detailsPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "AP Details"));
-
-//		detailsPanel.add(RecordIDLabel);
-//		detailsPanel.add(RecordIDTF);
-//		detailsPanel.add(SSIDLabel);
-//		detailsPanel.add(SSIDTF);
-//		detailsPanel.add(dateLabel);
-//		detailsPanel.add(dateTF);
-//		detailsPanel.add(RSSLabel);
-//		detailsPanel.add(RSSTF);
-//		detailsPanel.add(macLossLabel);
-//		detailsPanel.add(macLossTF);
-//		detailsPanel.add(delayLabel);
-//		detailsPanel.add(delayTF);
-//		detailsPanel.add(channelLabel);
-//		detailsPanel.add(channelTF);
-//		detailsPanel.add(secLabel);
-//		detailsPanel.add(secTF);
-//		detailsPanel.add(swLabel);
-//		detailsPanel.add(swTF);
-//		detailsPanel.add(gpsLongLabel);
-//		detailsPanel.add(gpsLongTF);
-//		detailsPanel.add(gpsLatLabel);
-//		detailsPanel.add(gpsLatTF);
-//		addStuffToDetailsPanel(
-		addStuffToJPanel(detailsPanel, new Component[] { RecordIDLabel, RecordIDTF, SSIDLabel, SSIDTF, dateLabel, dateTF,
-				RSSLabel, RSSTF, macLossLabel, macLossTF, delayLabel, delayTF, channelLabel, channelTF, secLabel, secTF,
-				swLabel, swTF, gpsLongLabel, gpsLongTF, gpsLatLabel, gpsLatTF });
+//		detailsPanel.setBackground(Color.lightGray);
+//		detailsPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "AP Details"));
+//		detailsPanel.setSize(360, 300);
+//		detailsPanel.setLocation(3, 0);
 
 		// setup details panel and add the components to it
 		exportButtonPanel = new JPanel();
 		exportButtonPanel.setLayout(new GridLayout(3, 2));
-		exportButtonPanel.setBackground(Color.lightGray);
-		exportButtonPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "Export Data"));
-		// exportButtonPanel.add(last3LossRates);
-		// exportButtonPanel.add(last3LossRatesTF);
-		// exportButtonPanel.add(avgofRSS);
-		// exportButtonPanel.add(avgofRSSTF);
-		// exportButtonPanel.add(overLappingAP);
-		// exportButtonPanel.add(overLappingChannels);
-		//addStuffToExportButtonPanel(
+//		exportButtonPanel.setBackground(Color.lightGray);
+//		exportButtonPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "Export Data"));
+//		exportButtonPanel.setSize(500, 200);
+//		exportButtonPanel.setLocation(3, 300);
+//		setupPanel(detailsPanel,new GridLayout(11, 2), Color.lightGray, "AP Details", 360, 300, 3, 0);
+//		setupPanel(exportButtonPanel,new GridLayout(3, 2), Color.lightGray, "Export Data", 500, 200, 3, 300);
+		setupPanel(detailsPanel,Color.lightGray, "AP Details", 360, 300, 3, 0);
+		setupPanel(exportButtonPanel, Color.lightGray, "Export Data", 500, 200, 3, 300);
+
+		addStuffToJPanel(detailsPanel,
+				new Component[] { RecordIDLabel, RecordIDTF, SSIDLabel, SSIDTF, dateLabel, dateTF, RSSLabel, RSSTF,
+						macLossLabel, macLossTF, delayLabel, delayTF, channelLabel, channelTF, secLabel, secTF, swLabel,
+						swTF, gpsLongLabel, gpsLongTF, gpsLatLabel, gpsLatTF });
+		
 		addStuffToJPanel(exportButtonPanel, new Component[] { last3LossRates, last3LossRatesTF, avgofRSS, avgofRSSTF,
 				overLappingAP, overLappingChannels });
-		exportButtonPanel.setSize(500, 200);
-		exportButtonPanel.setLocation(3, 300);
-		//content.add(exportButtonPanel);
+		
+		setButtonSizeAndLocation(insertButton, 100, 30, 370, 10);
+		setButtonSizeAndLocation(updateButton, 100, 30, 370, 110);
+		setButtonSizeAndLocation(exportButton, 100, 30, 370, 160);
+		setButtonSizeAndLocation(deleteButton, 100, 30, 370, 60);
+		setButtonSizeAndLocation(clearButton, 100, 30, 370, 210);
 
-//		insertButton.setSize(100, 30);
-//		updateButton.setSize(100, 30);
-//		exportButton.setSize(100, 30);
-//		deleteButton.setSize(100, 30);
-//		clearButton.setSize(100, 30);
-//
-//		insertButton.setLocation(370, 10);
-//		updateButton.setLocation(370, 110);
-//		exportButton.setLocation(370, 160);
-//		deleteButton.setLocation(370, 60);
-//		clearButton.setLocation(370, 210);
-		setButtonSizeAndLocation(insertButton,100,30,370,10);
-		setButtonSizeAndLocation(updateButton,100,30,370,110);
-		setButtonSizeAndLocation(exportButton,100,30,370,160);
-		setButtonSizeAndLocation(deleteButton,100,30,370,60);
-		setButtonSizeAndLocation(clearButton,100,30,370,210);
-
-//		insertButton.addActionListener(this);
-//		updateButton.addActionListener(this);
-//		exportButton.addActionListener(this);
-//		deleteButton.addActionListener(this);
-//		clearButton.addActionListener(this);
-
-//		content.add(insertButton);
-//		content.add(updateButton);
-//		content.add(exportButton);
-//		content.add(deleteButton);
-//		content.add(clearButton);
-		addStuffToContainer(content, new Component[] {exportButtonPanel,insertButton,updateButton,exportButton,deleteButton,clearButton});
+		addStuffToContainer(content, new Component[] { exportButtonPanel, insertButton, updateButton, exportButton,
+				deleteButton, clearButton });
 
 		TableofDBContents.setPreferredScrollableViewportSize(new Dimension(900, 300));
 
 		dbContentsPanel = new JScrollPane(TableofDBContents, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		dbContentsPanel.setBackground(Color.lightGray);
-		dbContentsPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "Database Content"));
-
-		detailsPanel.setSize(360, 300);
-		detailsPanel.setLocation(3, 0);
-		dbContentsPanel.setSize(700, 300);
-		dbContentsPanel.setLocation(477, 0);
+		
+//		dbContentsPanel.setBackground(Color.lightGray);
+//		dbContentsPanel.setBorder(BorderFactory.createTitledBorder(lineBorder, "Database Content"));
+//		dbContentsPanel.setSize(700, 300);
+//		dbContentsPanel.setLocation(477, 0);
+		setupPanel(dbContentsPanel, Color.lightGray, "Database Content", 700, 300, 477, 0);
 
 		content.add(detailsPanel);
 		content.add(dbContentsPanel);
@@ -236,7 +192,6 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 			swTF.setText("");
 			gpsLongTF.setText("");
 			gpsLatTF.setText("");
-
 		}
 
 		if (target == insertButton) {
@@ -269,7 +224,6 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 		if (target == updateButton) {
 			try {
 				String updateTemp = "UPDATE APPERFDATA SET SSID = '" + SSIDTF.getText() +
-
 						"', Date = " + "'" + dateTF.getText() + "'" + ", RSS = " + RSSTF.getText() + ", MAC_Loss = "
 						+ macLossTF.getText() + ", Delay = " + delayTF.getText() + ", Channel = " + channelTF.getText()
 						+ ", Sec = " + "'" + secTF.getText() + "'" + ", Software_Version = " + swTF.getText()
@@ -289,5 +243,4 @@ public class JDBCMainWindowContent extends JInternalFrame implements ActionListe
 			}
 		}
 	}
-
 }
